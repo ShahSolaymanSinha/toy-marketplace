@@ -25,7 +25,7 @@ const MyToys = () => {
                 setAllToys(data);
                 setTotalPages(Math.ceil(data.length / pageLimit));
             });
-    }, [user]);
+    }, []);
 
     useEffect(() => {
         const dataFetch = async () => {
