@@ -1,6 +1,6 @@
 import React from "react";
 
-const ToyBanner = ({ car }) => {
+const ToyBanner = ({ car, toy }) => {
     return (
         <div>
             <div className="hero h-[60vh] bg-base-200 rounded-lg">
@@ -9,21 +9,31 @@ const ToyBanner = ({ car }) => {
                     <div>
                         <h1 className="text-5xl font-bold">{car?.name}</h1>
                         <p className="py-1">
-                            <span className="font-semibold">Seller</span>: {car?.brand}
+                            <span className="font-semibold">Seller</span>: {toy == "default-toy" ? car?.brand : car?.sellerName}
                         </p>
                         <p className="py-1">
-                            <span className="font-semibold">Email</span>: {car?.brand}@gmail.com
+                            <span className="font-semibold">Email</span>: {toy == "default-toy" ? car?.brand : car?.sellerEmail}{toy == "default-toy" && "@gmail.com"}
                         </p>
                         <p className="py-1">
                             <span className="font-semibold">Price</span>: {car?.price}
                         </p>
                         <p className="py-1">
-                            <span className="font-semibold">Stock</span>: 14
+                            <span className="font-semibold">Stock</span>: {toy == "default-toy" ? 14 : car?.quantity}
                         </p>
+
+                        {/*  */}
+
+                        {/*  */}
+
                         {/* <p className="py-1">
                             <span className="font-semibold">Description</span>: This car is faster that bullet train. (Toy Bullet Train 😅)
                         </p> */}
                         {/* <button className="btn btn-primary">Buy Now</button> */}
+
+                        {/*  */}
+
+                        {/*  */}
+
                         {/* The button to open modal */}
                         <label htmlFor="my-modal" className="btn">
                             View Details

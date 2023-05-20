@@ -13,6 +13,9 @@ import "@smastrom/react-rating/style.css";
 import Blog from "./pages/Blog/Blog";
 import SingleToy from "./pages/SingleToy/SingleToy";
 import PrivateRoute from "./routes/PrivetRoute";
+import AddAToy from "./pages/AddAToy/AddAToy";
+import AllToys from "./pages/AllToys/AllToys";
+import Loader from "./pages/shared/Loader/Loader";
 
 const router = createBrowserRouter([
     {
@@ -39,7 +42,8 @@ const router = createBrowserRouter([
             },
             {
                 path: "/all-toys",
-                element: <Home />,
+                element: <AllToys></AllToys>,
+                loader: () => fetch("http://localhost:5000/added-toys"),
             },
             {
                 path: "/blogs",
@@ -49,10 +53,27 @@ const router = createBrowserRouter([
                 path: "/toy/:which/:id",
                 element: (
                     <PrivateRoute>
-                        <SingleToy></SingleToy>
+                        <SingleToy toy="default-toy"></SingleToy>
                     </PrivateRoute>
                 ),
                 loader: ({ params }) => fetch(`http://localhost:5000/${params.which}/${params.id}`),
+            },
+            {
+                path: "/added-single-toy/:id",
+                element: (
+                    <PrivateRoute>
+                        <SingleToy toy="added-toy"></SingleToy>
+                    </PrivateRoute>
+                ),
+                loader: ({ params }) => fetch(`http://localhost:5000/added-single-toy/${params.id}`),
+            },
+            {
+                path: "/add-a-toy",
+                element: <AddAToy></AddAToy>,
+            },
+            {
+                path: "/loader",
+                element: <Loader></Loader>,
             },
         ],
     },

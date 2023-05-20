@@ -1,0 +1,32 @@
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.pagination li {
+    margin: 0 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.pagination li.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination li:first-child {
+    margin-left: 0;
+}
+
+.pagination li:last-child {
+    margin-right: 0;
+}
