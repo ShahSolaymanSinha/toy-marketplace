@@ -1,13 +1,21 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthenticationContext } from "../../providers/AuthenticationProvider";
 
 const Navbar = () => {
     const { user } = useContext(AuthenticationContext);
 
+    const pathName = useLocation().pathname;
+    console.log(pathName);
+
     const handleUserName = (event) => {
         event.target.setAttribute("title", `${user.displayName}`);
+    };
+
+    const activeNavbarStyle = {
+        color: "red",
+        fontWeight: "bold",
     };
 
     return (
@@ -22,51 +30,71 @@ const Navbar = () => {
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
-                                <Link>Home</Link>
+                                <Link to={"/"} style={pathName == "/" ? activeNavbarStyle : {}}>
+                                    Home
+                                </Link>
                             </li>
                             <li>
-                                <Link>All Toys</Link>
+                                <Link to={"all-toys"} style={pathName == "/all-toys" ? activeNavbarStyle : {}}>
+                                    All Toys
+                                </Link>
                             </li>
                             {user && (
                                 <li>
-                                    <Link>My Toys</Link>
+                                    <Link to={"my-toys"} style={pathName == "/my-toys" ? activeNavbarStyle : {}}>
+                                        My Toys
+                                    </Link>
                                 </li>
                             )}
                             {user && (
                                 <li>
-                                    <Link>Add a Toy</Link>
+                                    <Link to={"/add-a-toy"} style={pathName == "/add-a-toy" ? activeNavbarStyle : {}}>
+                                        Add a Toy
+                                    </Link>
                                 </li>
                             )}
                             <li>
-                                <Link>Blogs</Link>
+                                <Link to={"/blogs"} style={pathName == "/blogs" ? activeNavbarStyle : {}}>
+                                    Blogs
+                                </Link>
                             </li>
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">
-                        <img src="/logo.png" alt="" className="w-[56px] hidden lg:block" />
+                    <Link to={"/"} className="btn btn-ghost normal-case text-xl">
+                        <img src="/logo.png" alt="" className="w-[50px] hidden lg:block rounded-full" />
                         <h3>Speedy Sports</h3>
-                    </a>
+                    </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <li>
-                            <Link>Home</Link>
+                            <Link to={"/"} style={pathName == "/" ? activeNavbarStyle : {}}>
+                                Home
+                            </Link>
                         </li>
                         <li>
-                            <Link>All Toys</Link>
+                            <Link to={"all-toys"} style={pathName == "/all-toys" ? activeNavbarStyle : {}}>
+                                All Toys
+                            </Link>
                         </li>
                         {user && (
                             <li>
-                                <Link>My Toys</Link>
+                                <Link to={"my-toys"} style={pathName == "/my-toys" ? activeNavbarStyle : {}}>
+                                    My Toys
+                                </Link>
                             </li>
                         )}
                         {user && (
                             <li>
-                                <Link>Add a Toy</Link>
+                                <Link to={"/add-a-toy"} style={pathName == "/add-a-toy" ? activeNavbarStyle : {}}>
+                                    Add a Toy
+                                </Link>
                             </li>
                         )}
                         <li>
-                            <Link>Blogs</Link>
+                            <Link to={"/blogs"} style={pathName == "/blogs" ? activeNavbarStyle : {}}>
+                                Blogs
+                            </Link>
                         </li>
                     </ul>
                 </div>
@@ -87,7 +115,9 @@ const Navbar = () => {
                             </div>
                         )
                     ) : (
-                        <Link className="btn">Login</Link>
+                        <Link to={"/login"} className="btn">
+                            Login
+                        </Link>
                     )}
                 </div>
             </div>

@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./login.css";
 import { AuthenticationContext } from "../../providers/AuthenticationProvider";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
     const { signIn, signInWithGoogle, logOut } = useContext(AuthenticationContext);
+    const [logInError, setLogInError] = useState("");
 
     const handleLogIn = (event) => {
         event.preventDefault();
@@ -19,6 +20,7 @@ const LoginPage = () => {
             })
             .catch((error) => {
                 console.log("Login Page Error: " + error);
+                setLogInError(error);
             });
     };
 
@@ -43,12 +45,23 @@ const LoginPage = () => {
                     <p className="title">Login</p>
                     <form onSubmit={handleLogIn} className="form">
                         <div className="input-group flex flex-col">
-                            <label htmlFor="email">Username</label>
-                            <input type="email" name="email" id="email" placeholder="Enter your email" />
+                            <label className="relative" htmlFor="email">
+                                Email
+                                {logInError == "FirebaseError: Firebase: Error (auth/user-not-found)." && (
+                                    <span className="text-red-600 bg-inherit px-0 absolute top-0 left-10"> [ User not found ] </span>
+                                )}
+                            </label>
+
+                            <input type="email" name="email" id="email" placeholder="Enter your email" required />
                         </div>
                         <div className="input-group flex flex-col">
-                            <label htmlFor="password">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Enter your password" />
+                            <label className="relative" htmlFor="password">
+                                Password
+                                {logInError == "FirebaseError: Firebase: Error (auth/wrong-password)." && (
+                                    <span className="text-red-600 bg-inherit px-0 absolute top-0 left-16"> [ Wrong password ] </span>
+                                )}
+                            </label>
+                            <input type="password" name="password" id="password" placeholder="Enter your password" required />
                             <div className="forgot"></div>
                         </div>
                         <button className="sign">Sign in</button>

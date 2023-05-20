@@ -2,11 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
+import Layout from "./pages/Layout/Layout";
+import Home from "./pages/Home/Home";
 import AuthenticationProvider from "./providers/AuthenticationProvider";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import homePageLoader from "./utils/homePageLoader";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import "@smastrom/react-rating/style.css";
 
 const router = createBrowserRouter([
     {
@@ -16,10 +19,12 @@ const router = createBrowserRouter([
                 <Layout></Layout>
             </div>
         ),
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",
                 element: <Home></Home>,
+                loader: () => homePageLoader(),
             },
             {
                 path: "/register",
@@ -28,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <LoginPage />,
+            },
+            {
+                path: "/all-toys",
+                element: <Home />,
             },
         ],
     },
