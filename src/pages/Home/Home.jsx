@@ -5,11 +5,13 @@ import SubCategory from "../shared/SubCategory";
 import { useLoaderData } from "react-router-dom";
 import BestSellingTrucks from "../shared/BestSellingTrucks";
 import BestSellingPoliceCars from "../shared/BestSellingPoliceCars";
+import useDocumentTitle from "../../customHook/useDocumentTitle";
 
 const Home = () => {
     const cars = useLoaderData()[0];
     const trucks = useLoaderData()[1];
     const policeCars = useLoaderData()[2];
+    const [documentTitle, setDocumentTitle] = useDocumentTitle("Home");
     return (
         <div>
             <Banner></Banner>

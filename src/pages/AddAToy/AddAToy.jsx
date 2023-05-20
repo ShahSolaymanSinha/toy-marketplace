@@ -26,7 +26,7 @@ const AddAToy = () => {
             subCategory: selectedOption,
             price: price,
             rating: rating,
-            quantity: availableQuantity,
+            quantity: Math.abs(availableQuantity),
             description: description,
         };
 
@@ -41,13 +41,20 @@ const AddAToy = () => {
             .then((data) => console.log(data))
             .catch((er) => console.log(er));
 
-        form.pictureUrl.value = "";
-        form.name.value = "";
-        form.select.value = "select";
-        form.pri.value = "";
-        form.rating.value = "";
-        form.quantity.value = "";
-        form.des.value = "";
+        // form.pictureUrl.value = "";
+        // form.name.value = "";
+        // form.select.value = "select";
+        // form.pri.value = "";
+        // form.rating.value = "";
+        // form.quantity.value = "";
+        // form.des.value = "";
+
+        setPictureUrl("");
+        setName("");
+        setPrice("");
+        setRating("");
+        setAvailableQuantity("");
+        setDescription("");
 
         Swal.fire({
             icon: "success",
@@ -105,9 +112,11 @@ const AddAToy = () => {
                 <textarea id="description" name="des" value={description} onChange={(e) => setDescription(e.target.value)} required />
             </div>
 
-            <button className="btn w-full mb-10" type="submit">
+            <button id="submitBtn" className="btn w-full mb-10" type="submit">
                 Submit
             </button>
+
+            <button type="reset">Reset</button>
         </form>
     );
 };
