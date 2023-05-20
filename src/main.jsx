@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import homePageLoader from "./utils/homePageLoader";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import "@smastrom/react-rating/style.css";
+import Blog from "./pages/Blog/Blog";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
             {
                 path: "/all-toys",
                 element: <Home />,
+            },
+            {
+                path: "/blogs",
+                element: <Blog></Blog>,
+            },
+            {
+                path: "/toy/:id",
+                element: <Blog></Blog>,
             },
         ],
     },

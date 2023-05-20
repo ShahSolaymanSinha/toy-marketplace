@@ -2,8 +2,7 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 import GalleryCard from "./GalleryCard";
 
-const Gallery = ({cars}) => {
-    // const cars = useLoaderData();
+const Gallery = ({ cars }) => {
     return (
         <div className="mt-10">
             <div>
