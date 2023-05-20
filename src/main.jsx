@@ -12,6 +12,7 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import "@smastrom/react-rating/style.css";
 import Blog from "./pages/Blog/Blog";
 import SingleToy from "./pages/SingleToy/SingleToy";
+import PrivateRoute from "./routes/PrivetRoute";
 
 const router = createBrowserRouter([
     {
@@ -46,7 +47,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/toy/:which/:id",
-                element: <SingleToy></SingleToy>,
+                element: (
+                    <PrivateRoute>
+                        <SingleToy></SingleToy>
+                    </PrivateRoute>
+                ),
                 loader: ({ params }) => fetch(`http://localhost:5000/${params.which}/${params.id}`),
             },
         ],

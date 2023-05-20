@@ -20,10 +20,28 @@ const ToyBanner = ({ car }) => {
                         <p className="py-1">
                             <span className="font-semibold">Stock</span>: 14
                         </p>
-                        <p className="py-1">
+                        {/* <p className="py-1">
                             <span className="font-semibold">Description</span>: This car is faster that bullet train. (Toy Bullet Train 😅)
-                        </p>
-                        <button className="btn btn-primary">Buy Now</button>
+                        </p> */}
+                        {/* <button className="btn btn-primary">Buy Now</button> */}
+                        {/* The button to open modal */}
+                        <label htmlFor="my-modal" className="btn">
+                            View Details
+                        </label>
+
+                        {/* Put this part before </body> tag */}
+                        <input type="checkbox" id="my-modal" className="modal-toggle" />
+                        <div className="modal">
+                            <div className="modal-box">
+                                <h3 className="font-bold text-lg">{car?.name}</h3>
+                                <p className="py-4">This car is faster that bullet train. (Toy Bullet Train 😅)</p>
+                                <div className="modal-action">
+                                    <label htmlFor="my-modal" className="btn">
+                                        Ok
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

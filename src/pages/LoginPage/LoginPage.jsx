@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react";
 import "./login.css";
 import { AuthenticationContext } from "../../providers/AuthenticationProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     const { signIn, signInWithGoogle, logOut } = useContext(AuthenticationContext);
     const [logInError, setLogInError] = useState("");
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location?.state?.from?.pathname || "/";
 
     const handleLogIn = (event) => {
         event.preventDefault();
@@ -17,6 +20,7 @@ const LoginPage = () => {
         signIn(email, password)
             .then(() => {
                 console.log("User login successful");
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.log("Login Page Error: " + error);
@@ -28,6 +32,7 @@ const LoginPage = () => {
         signInWithGoogle()
             .then(() => {
                 console.log("User logged in with google");
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.log("Google Sign In Error: " + error);
