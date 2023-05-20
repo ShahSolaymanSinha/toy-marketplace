@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Layout from "./pages/Layout/Layout";
 import Home from "./pages/Home/Home";
-import AuthenticationProvider from "./providers/AuthenticationProvider";
+import AuthenticationProvider, { AuthenticationContext } from "./providers/AuthenticationProvider";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import homePageLoader from "./utils/homePageLoader";
@@ -16,6 +16,7 @@ import PrivateRoute from "./routes/PrivetRoute";
 import AddAToy from "./pages/AddAToy/AddAToy";
 import AllToys from "./pages/AllToys/AllToys";
 import Loader from "./pages/shared/Loader/Loader";
+import MyToys from "./pages/MyToys/MyToys";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
                 loader: () => fetch("http://localhost:5000/added-toys"),
             },
             {
+                path: "/test",
+                element: <MyToys></MyToys>,
+            },
+            {
                 path: "/blogs",
                 element: <Blog></Blog>,
             },
@@ -72,8 +77,8 @@ const router = createBrowserRouter([
                 element: <AddAToy></AddAToy>,
             },
             {
-                path: "/loader",
-                element: <Loader></Loader>,
+                path: "/my-toys",
+                element: <MyToys></MyToys>,
             },
         ],
     },

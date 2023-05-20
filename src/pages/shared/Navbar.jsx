@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { AuthenticationContext } from "../../providers/AuthenticationProvider";
 
 const Navbar = () => {
-    const { user } = useContext(AuthenticationContext);
+    const { user, logOut } = useContext(AuthenticationContext);
 
     const pathName = useLocation().pathname;
     console.log(pathName);
@@ -102,16 +102,28 @@ const Navbar = () => {
                 <div className="navbar-end">
                     {user ? (
                         user.photoURL ? (
-                            <div className="avatar">
-                                <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img onMouseOver={handleUserName} src={user.photoURL} />
+                            <div className="flex gap-5">
+                                <div className="avatar">
+                                    <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                        <img onMouseOver={handleUserName} src={user.photoURL} />
+                                    </div>
                                 </div>
+
+                                <button className="btn" onClick={() => logOut()}>
+                                    Log Out
+                                </button>
                             </div>
                         ) : (
-                            <div className="avatar">
-                                <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src="/avatar.png" />
+                            <div className="flex gap-5">
+                                <div className="avatar">
+                                    <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                        <img src="/avatar.png" />
+                                    </div>
                                 </div>
+
+                                <button className="btn" onClick={() => logOut()}>
+                                    Log Out
+                                </button>
                             </div>
                         )
                     ) : (
