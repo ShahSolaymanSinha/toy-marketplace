@@ -20,21 +20,21 @@ const SubCategory = ({ cars, trucks, policeCars }) => {
                     <TabPanel>
                         <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center">
                             {cars.slice(0, 3).map((car) => (
-                                <SubCategoryCard key={car._id} car={car}></SubCategoryCard>
+                                <SubCategoryCard key={car._id} car={car} what="cars"></SubCategoryCard>
                             ))}
                         </div>
                     </TabPanel>
                     <TabPanel>
                         <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center">
                             {trucks.map((truck) => (
-                                <SubCategoryCard key={truck._id} car={truck}></SubCategoryCard>
+                                <SubCategoryCard key={truck._id} car={truck} what="trucks"></SubCategoryCard>
                             ))}
                         </div>
                     </TabPanel>
                     <TabPanel>
                         <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center">
                             {policeCars.map((car) => (
-                                <SubCategoryCard key={car._id} car={car}></SubCategoryCard>
+                                <SubCategoryCard key={car._id} car={car} what="police-cars"></SubCategoryCard>
                             ))}
                         </div>
                     </TabPanel>

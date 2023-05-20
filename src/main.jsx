@@ -11,6 +11,7 @@ import homePageLoader from "./utils/homePageLoader";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import "@smastrom/react-rating/style.css";
 import Blog from "./pages/Blog/Blog";
+import SingleToy from "./pages/SingleToy/SingleToy";
 
 const router = createBrowserRouter([
     {
@@ -44,8 +45,9 @@ const router = createBrowserRouter([
                 element: <Blog></Blog>,
             },
             {
-                path: "/toy/:id",
-                element: <Blog></Blog>,
+                path: "/toy/:which/:id",
+                element: <SingleToy></SingleToy>,
+                loader: ({ params }) => fetch(`http://localhost:5000/${params.which}/${params.id}`),
             },
         ],
     },

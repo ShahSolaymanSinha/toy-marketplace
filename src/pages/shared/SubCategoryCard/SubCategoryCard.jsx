@@ -2,7 +2,9 @@ import React from "react";
 import { Rating, RoundedStar } from "@smastrom/react-rating";
 import { Link } from "react-router-dom";
 
-const SubCategoryCard = ({ car }) => {
+const SubCategoryCard = ({ car, what }) => {
+    const which = what;
+
     const myStyles = {
         itemShapes: RoundedStar,
         activeFillColor: "#ffb700",
@@ -24,9 +26,9 @@ const SubCategoryCard = ({ car }) => {
                     </div>
                 </div>
                 <div className="card-actions justify-center w-full">
-                    <button className="btn btn-primary w-full">
-                        <Link to={`/toy/${car?._id}`}>View Details</Link>
-                    </button>
+                    <Link className="w-full" to={`/toy/${which}/${car?._id}`}>
+                        <button className="btn btn-primary w-full">View Details</button>
+                    </Link>
                 </div>
             </div>
         </div>
