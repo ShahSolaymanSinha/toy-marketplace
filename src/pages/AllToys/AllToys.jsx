@@ -29,10 +29,6 @@ const AllToys = () => {
         loadData();
     }, [currentPage]);
 
-    if (loading) {
-        return <Loader></Loader>;
-    }
-
     return (
         <div className="mt-10">
             <div className="overflow-x-auto">
