@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             {
                 path: "/all-toys",
                 element: <AllToys></AllToys>,
-                loader: () => fetch("http://localhost:5000/added-toys"),
+                loader: () => fetch("https://a11-server-side-six.vercel.app/added-toys"),
             },
             {
                 path: "/test",
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
                         <SingleToy toy="default-toy"></SingleToy>
                     </PrivateRoute>
                 ),
-                loader: ({ params }) => fetch(`http://localhost:5000/${params.which}/${params.id}`),
+                loader: ({ params }) => fetch(`https://a11-server-side-six.vercel.app/${params.which}/${params.id}`),
             },
             {
                 path: "/added-single-toy/:id",
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
                         <SingleToy toy="added-toy"></SingleToy>
                     </PrivateRoute>
                 ),
-                loader: ({ params }) => fetch(`http://localhost:5000/added-single-toy/${params.id}`),
+                loader: ({ params }) => fetch(`https://a11-server-side-six.vercel.app/added-single-toy/${params.id}`),
             },
             {
                 path: "/add-a-toy",

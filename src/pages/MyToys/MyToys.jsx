@@ -3,6 +3,7 @@ import { AuthenticationContext } from "../../providers/AuthenticationProvider";
 import Pagination from "../shared/Pagination/Pagination";
 import AllToySingleElement from "../shared/AllToySingleElement";
 import Loader from "../shared/Loader/Loader";
+import useDocumentTitle from "../../customHook/useDocumentTitle";
 
 const MyToys = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -11,6 +12,7 @@ const MyToys = () => {
     const [siteLoading, setSiteLoading] = useState(true);
     const [totalPages, setTotalPages] = useState();
     const [allToys, setAllToys] = useState([]);
+    useDocumentTitle("My Toys");
 
     const { user, loading } = useContext(AuthenticationContext);
 
@@ -19,7 +21,7 @@ const MyToys = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5000/my-all-toys?email=${user?.email}`)
+        fetch(`https://a11-server-side-six.vercel.app/my-all-toys?email=${user?.email}`)
             .then((res) => res.json())
             .then((data) => {
                 setAllToys(data);
@@ -29,7 +31,9 @@ const MyToys = () => {
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data = await (await fetch(`http://localhost:5000/my-toys?email=${user?.email}&limit=${pageLimit}&page=${currentPage}`)).json();
+            const data = await (
+                await fetch(`https://a11-server-side-six.vercel.app/my-toys?email=${user?.email}&limit=${pageLimit}&page=${currentPage}`)
+            ).json();
             setPageData(data);
             setSiteLoading(false);
         };

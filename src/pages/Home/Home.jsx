@@ -11,7 +11,7 @@ const Home = () => {
     const cars = useLoaderData()[0];
     const trucks = useLoaderData()[1];
     const policeCars = useLoaderData()[2];
-    const [documentTitle, setDocumentTitle] = useDocumentTitle("Home");
+    useDocumentTitle("Home");
     return (
         <div>
             <Banner></Banner>

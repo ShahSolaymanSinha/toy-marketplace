@@ -1,6 +1,8 @@
 import React from "react";
+import useDocumentTitle from "../../customHook/useDocumentTitle";
 
 const Blog = () => {
+    useDocumentTitle("Blog");
     return (
         <div className="mt-10 mb-10">
             <div>

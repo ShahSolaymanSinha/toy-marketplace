@@ -103,7 +103,7 @@ const Navbar = () => {
                     {user ? (
                         user.photoURL ? (
                             <div className="flex gap-5">
-                                <div className="avatar">
+                                <div className="avatar hidden md:block">
                                     <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                         <img onMouseOver={handleUserName} src={user.photoURL} />
                                     </div>
@@ -115,7 +115,7 @@ const Navbar = () => {
                             </div>
                         ) : (
                             <div className="flex gap-5">
-                                <div className="avatar">
+                                <div className="avatar hidden md:block">
                                     <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                         <img src="/avatar.png" />
                                     </div>

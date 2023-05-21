@@ -13,7 +13,7 @@ const SubCategory = ({ cars, trucks, policeCars }) => {
             </div>
             <div>
                 <Tabs>
-                    <TabList className={"flex gap-10 justify-center mb-10"}>
+                    <TabList className={"flex flex-col md:flex-row w-full gap-10 justify-center mb-10"}>
                         <Tab className={"btn rounded-lg"}>Sports Car</Tab>
                         <Tab className={"btn"}>Truck</Tab>
                         <Tab className={"btn"}>Mini Police Car</Tab>

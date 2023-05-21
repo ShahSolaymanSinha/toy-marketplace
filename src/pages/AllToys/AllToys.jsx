@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import AllToySingleElement from "../shared/AllToySingleElement";
 import Pagination from "../shared/Pagination/Pagination";
 import Loader from "../shared/Loader/Loader";
+import useDocumentTitle from "../../customHook/useDocumentTitle";
 
 const AllToys = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -10,6 +11,7 @@ const AllToys = () => {
     const allToys = useLoaderData();
     const [pageLimit] = useState(10);
     const [loading, setLoading] = useState(false);
+    useDocumentTitle("All Toys");
 
     const totalPages = Math.ceil(allToys.length / pageLimit);
 
@@ -20,7 +22,7 @@ const AllToys = () => {
     useEffect(() => {
         const loadData = async () => {
             setLoading(true);
-            const data = await fetch(`http://localhost:5000/added-toys?page=${currentPage}&limit=${pageLimit}`);
+            const data = await fetch(`https://a11-server-side-six.vercel.app/added-toys?page=${currentPage}&limit=${pageLimit}`);
             const dataParsed = await data.json();
             setPageData(dataParsed);
             setLoading(false);

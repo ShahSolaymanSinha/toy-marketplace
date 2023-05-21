@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "./login.css";
 import { AuthenticationContext } from "../../providers/AuthenticationProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import useDocumentTitle from "../../customHook/useDocumentTitle";
 
 const LoginPage = () => {
     const { signIn, signInWithGoogle, logOut } = useContext(AuthenticationContext);
@@ -9,6 +10,7 @@ const LoginPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const from = location?.state?.from?.pathname || "/";
+    useDocumentTitle("Login");
 
     const handleLogIn = (event) => {
         event.preventDefault();

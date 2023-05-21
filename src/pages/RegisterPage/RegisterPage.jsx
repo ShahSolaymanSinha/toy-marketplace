@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { AuthenticationContext } from "../../providers/AuthenticationProvider";
 import { Link, useNavigate } from "react-router-dom";
+import useDocumentTitle from "../../customHook/useDocumentTitle";
 
 const RegisterPage = () => {
     const { createUser, updateUserProfile, loading } = useContext(AuthenticationContext);
     const navigate = useNavigate();
+    useDocumentTitle("Register");
 
     const handleSubmitForm = (event) => {
         event.preventDefault();

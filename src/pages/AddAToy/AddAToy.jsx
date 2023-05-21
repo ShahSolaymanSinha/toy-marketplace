@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "./addAToy.css";
 import { AuthenticationContext } from "../../providers/AuthenticationProvider";
 import Swal from "sweetalert2";
+import useDocumentTitle from "../../customHook/useDocumentTitle";
 
 const AddAToy = () => {
     const { user } = useContext(AuthenticationContext);
@@ -13,6 +14,7 @@ const AddAToy = () => {
     const [availableQuantity, setAvailableQuantity] = useState("");
     const [description, setDescription] = useState("");
     const [selectedOption, setSelectedOption] = useState("sportsCar");
+    useDocumentTitle("Add a Toy");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -30,7 +32,7 @@ const AddAToy = () => {
             description: description,
         };
 
-        fetch("http://localhost:5000/add-toy", {
+        fetch("https://a11-server-side-six.vercel.app/add-toy", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
