@@ -35,7 +35,7 @@ const AddAToy = () => {
         };
 
         if (toyData) {
-            fetch(`http://localhost:5000/update-toy/${toyData?._id}`, {
+            fetch(`https://a11-server-side-mdsinha.vercel.app/update-toy/${toyData?._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

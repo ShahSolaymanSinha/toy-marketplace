@@ -91,7 +91,7 @@ const router = createBrowserRouter([
             {
                 path: "/toy/update/:id",
                 element: <AddAToy></AddAToy>,
-                loader: ({ params }) => fetch(`http://localhost:5000/added-single-toy/${params.id}`),
+                loader: ({ params }) => fetch(`https://a11-server-side-mdsinha.vercel.app/added-single-toy/${params.id}`),
             },
         ],
     },

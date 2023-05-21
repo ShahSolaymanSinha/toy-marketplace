@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const AllToySingleElement = ({ toy, setChange, change }) => {
     const navigate = useNavigate();
     const handleDelete = () => {
-        fetch(`http://localhost:5000/toy/delete/${toy?._id}`, {
+        fetch(`https://a11-server-side-mdsinha.vercel.app/toy/delete/${toy?._id}`, {
             method: "DELETE",
         })
             .then((data) => console.log(data))
