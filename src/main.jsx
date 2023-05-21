@@ -88,6 +88,11 @@ const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
             },
+            {
+                path: "/toy/update/:id",
+                element: <AddAToy></AddAToy>,
+                loader: ({ params }) => fetch(`http://localhost:5000/added-single-toy/${params.id}`),
+            },
         ],
     },
 ]);

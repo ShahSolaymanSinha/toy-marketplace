@@ -3,24 +3,26 @@ import "./addAToy.css";
 import { AuthenticationContext } from "../../providers/AuthenticationProvider";
 import Swal from "sweetalert2";
 import useDocumentTitle from "../../customHook/useDocumentTitle";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const AddAToy = () => {
     const { user } = useContext(AuthenticationContext);
-
-    const [pictureUrl, setPictureUrl] = useState("");
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [rating, setRating] = useState("");
-    const [availableQuantity, setAvailableQuantity] = useState("");
-    const [description, setDescription] = useState("");
-    const [selectedOption, setSelectedOption] = useState("sportsCar");
+    const navigate = useNavigate();
+    const [toyData] = useLoaderData();
     useDocumentTitle("Add a Toy");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
+        const pictureUrl = form.pictureUrl.value;
+        const name = form.name.value;
+        const selectedOption = form.select.value;
+        const price = form.price.value;
+        const rating = form.rating.value;
+        const availableQuantity = form.quantity.value;
+        const description = form.description.value;
 
-        const toyData = {
+        const newToyData = {
             picture: pictureUrl,
             toyName: name,
             sellerName: user?.displayName,
@@ -32,23 +34,36 @@ const AddAToy = () => {
             description: description,
         };
 
-        fetch("https://a11-server-side-six.vercel.app/add-toy", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(toyData),
-        })
-            .then((res) => res.json())
-            .then((data) => console.log(data))
-            .catch((er) => console.log(er));
+        if (toyData) {
+            fetch(`http://localhost:5000/update-toy/${toyData?._id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newToyData),
+            });
 
-        setPictureUrl("");
-        setName("");
-        setPrice("");
-        setRating("");
-        setAvailableQuantity("");
-        setDescription("");
+            navigate("/my-toys");
+        } else {
+            fetch("https://a11-server-side-six.vercel.app/add-toy", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newToyData),
+            })
+                .then((res) => res.json())
+                .then((data) => console.log(data))
+                .catch((er) => console.log(er));
+        }
+
+        form.pictureUrl.value = "";
+        form.name.value = "";
+        form.select.value = "";
+        form.price.value = "";
+        form.rating.value = "";
+        form.quantity.value = "";
+        form.description.value = "";
 
         Swal.fire({
             icon: "success",
@@ -60,11 +75,11 @@ const AddAToy = () => {
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="pictureUrl">Picture URL:</label>
-                <input type="text" id="pictureUrl" name="pictureUrl" value={pictureUrl} onChange={(e) => setPictureUrl(e.target.value)} required />
+                <input type="text" id="pictureUrl" name="pictureUrl" defaultValue={toyData ? toyData.picture : pictureUrl} required />
             </div>
             <div>
                 <label htmlFor="name">Toy Name:</label>
-                <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                <input type="text" name="name" id="name" defaultValue={toyData ? toyData.toyName : name} required />
             </div>
             <div>
                 <label htmlFor="sellerName">Seller Name:</label>
@@ -76,7 +91,7 @@ const AddAToy = () => {
             </div>
             <div>
                 <label htmlFor="optionField">Select a Sub-Category:</label>
-                <select id="optionField" name="select" value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} required>
+                <select id="optionField" name="select" defaultValue={toyData ? toyData.subCategory : selectedOption} required>
                     <option value="sportsCar">Sports Car</option>
                     <option value="truck">Truck</option>
                     <option value="policeCar">Police Car</option>
@@ -84,11 +99,11 @@ const AddAToy = () => {
             </div>
             <div>
                 <label htmlFor="price">Price:</label>
-                <input type="number" name="pri" id="price" value={price} onChange={(e) => setPrice(parseInt(e.target.value))} required />
+                <input type="number" name="price" id="price" defaultValue={toyData ? toyData.price : price} required />
             </div>
             <div>
                 <label htmlFor="rating">Rating:</label>
-                <input type="number" name="rating" id="rating" value={rating} onChange={(e) => setRating(parseInt(e.target.value))} required />
+                <input type="number" name="rating" id="rating" defaultValue={toyData ? toyData.rating : rating} required />
             </div>
             <div>
                 <label htmlFor="availableQuantity">Available Quantity:</label>
@@ -96,14 +111,20 @@ const AddAToy = () => {
                     type="number"
                     name="quantity"
                     id="availableQuantity"
-                    value={availableQuantity}
+                    defaultValue={toyData ? toyData.quantity : availableQuantity}
                     onChange={(e) => setAvailableQuantity(e.target.value)}
                     required
                 />
             </div>
             <div>
                 <label htmlFor="description">Description:</label>
-                <textarea id="description" name="des" value={description} onChange={(e) => setDescription(e.target.value)} required />
+                <textarea
+                    id="description"
+                    name="description"
+                    defaultValue={toyData ? toyData.description : description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                />
             </div>
 
             <button id="submitBtn" className="btn w-full mb-10" type="submit">

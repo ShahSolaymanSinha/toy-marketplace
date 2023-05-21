@@ -13,16 +13,17 @@ const MyToys = () => {
     const [totalPages, setTotalPages] = useState();
     const [allToys, setAllToys] = useState([]);
     const [sortData, setSortData] = useState(1);
+    const [change, setChange] = useState(false);
     useDocumentTitle("My Toys");
     const downArrow = (
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
         </svg>
     );
 
     const upArrow = (
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
         </svg>
     );
 
@@ -39,7 +40,7 @@ const MyToys = () => {
                 setAllToys(data);
                 setTotalPages(Math.ceil(data.length / pageLimit));
             });
-    }, [user, sortData]);
+    }, [user, sortData, change]);
 
     useEffect(() => {
         const dataFetch = async () => {
@@ -51,7 +52,7 @@ const MyToys = () => {
         };
 
         dataFetch();
-    }, [currentPage, user, sortData]);
+    }, [currentPage, user, sortData, change]);
 
     if (loading) {
         return <Loader></Loader>;
@@ -67,7 +68,7 @@ const MyToys = () => {
                 <table className="table w-full">
                     {/* head */}
                     <thead>
-                        <tr>
+                        <tr className="w-full">
                             <th>Seller</th>
                             <th>Toy Name</th>
                             <th>Sub-category</th>
@@ -76,9 +77,12 @@ const MyToys = () => {
                             </th>
                             <th>Quantity</th>
                             <th>View Details</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>{pageData && pageData?.map((toy) => <AllToySingleElement key={toy?._id} toy={toy}></AllToySingleElement>)}</tbody>
+                    <tbody>
+                        {pageData && pageData?.map((toy) => <AllToySingleElement key={toy?._id} toy={toy} setChange={setChange} change={change}></AllToySingleElement>)}
+                    </tbody>
                 </table>
             </div>
             {totalPages && (
