@@ -43,14 +43,6 @@ const AddAToy = () => {
             .then((data) => console.log(data))
             .catch((er) => console.log(er));
 
-        // form.pictureUrl.value = "";
-        // form.name.value = "";
-        // form.select.value = "select";
-        // form.pri.value = "";
-        // form.rating.value = "";
-        // form.quantity.value = "";
-        // form.des.value = "";
-
         setPictureUrl("");
         setName("");
         setPrice("");
@@ -117,8 +109,6 @@ const AddAToy = () => {
             <button id="submitBtn" className="btn w-full mb-10" type="submit">
                 Submit
             </button>
-
-            <button type="reset">Reset</button>
         </form>
     );
 };
