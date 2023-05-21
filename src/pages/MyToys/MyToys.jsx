@@ -12,7 +12,19 @@ const MyToys = () => {
     const [siteLoading, setSiteLoading] = useState(true);
     const [totalPages, setTotalPages] = useState();
     const [allToys, setAllToys] = useState([]);
+    const [sortData, setSortData] = useState(1);
     useDocumentTitle("My Toys");
+    const downArrow = (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
+        </svg>
+    );
+
+    const upArrow = (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
+        </svg>
+    );
 
     const { user, loading } = useContext(AuthenticationContext);
 
@@ -27,19 +39,19 @@ const MyToys = () => {
                 setAllToys(data);
                 setTotalPages(Math.ceil(data.length / pageLimit));
             });
-    }, [user]);
+    }, [user, sortData]);
 
     useEffect(() => {
         const dataFetch = async () => {
             const data = await (
-                await fetch(`https://a11-server-side-six.vercel.app/my-toys?email=${user?.email}&limit=${pageLimit}&page=${currentPage}`)
+                await fetch(`https://a11-server-side-six.vercel.app/my-toys?email=${user?.email}&limit=${pageLimit}&page=${currentPage}&sort=${sortData}`)
             ).json();
             setPageData(data);
             setSiteLoading(false);
         };
 
         dataFetch();
-    }, [currentPage, user]);
+    }, [currentPage, user, sortData]);
 
     if (loading) {
         return <Loader></Loader>;
@@ -59,7 +71,9 @@ const MyToys = () => {
                             <th>Seller</th>
                             <th>Toy Name</th>
                             <th>Sub-category</th>
-                            <th>Price</th>
+                            <th onClick={() => setSortData(-sortData)} className="flex gap-1">
+                                <span>{sortData == 1 ? upArrow : downArrow}</span> Price
+                            </th>
                             <th>Quantity</th>
                             <th>View Details</th>
                         </tr>

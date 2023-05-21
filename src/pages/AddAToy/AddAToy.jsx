@@ -92,11 +92,11 @@ const AddAToy = () => {
             </div>
             <div>
                 <label htmlFor="price">Price:</label>
-                <input type="number" name="pri" id="price" value={price} onChange={(e) => setPrice(e.target.value)} required />
+                <input type="number" name="pri" id="price" value={price} onChange={(e) => setPrice(parseInt(e.target.value))} required />
             </div>
             <div>
                 <label htmlFor="rating">Rating:</label>
-                <input type="number" name="rating" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} required />
+                <input type="number" name="rating" id="rating" value={rating} onChange={(e) => setRating(parseInt(e.target.value))} required />
             </div>
             <div>
                 <label htmlFor="availableQuantity">Available Quantity:</label>
