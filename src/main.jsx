@@ -17,6 +17,7 @@ import AddAToy from "./pages/AddAToy/AddAToy";
 import AllToys from "./pages/AllToys/AllToys";
 import Loader from "./pages/shared/Loader/Loader";
 import MyToys from "./pages/MyToys/MyToys";
+import UpdateAToy from "./pages/UpdataAToy/UpdateAToy";
 
 const router = createBrowserRouter([
     {
@@ -90,7 +91,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/toy/update/:id",
-                element: <AddAToy></AddAToy>,
+                element: <UpdateAToy></UpdateAToy>,
                 loader: ({ params }) => fetch(`https://a11-server-side-mdsinha.vercel.app/added-single-toy/${params.id}`),
             },
         ],
