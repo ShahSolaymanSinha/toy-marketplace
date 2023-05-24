@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 const AddAToy = () => {
     const { user } = useContext(AuthenticationContext);
     useDocumentTitle("Add a Toy");
-    const toyData = null;
 
     const handleSubmit = (event) => {
         event.preventDefault();
