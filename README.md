@@ -1,5 +1,3 @@
-# b7a11-toy-marketplace-client-side-ShahSolaymanSinha
-
 ## About This Website
 
 -   In this amazing website you can find you dream toy
